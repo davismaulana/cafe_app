@@ -37,6 +37,16 @@
                     @endforeach
                 </select>
             </div>
+            <div class="mb-3">
+                <label for="ingredients" class="form-label">Ingredients</label>
+                <select name="ingredients[]" id="ingredients" class="form-control" multiple required>
+                    @foreach ($ingredients as $ingredient)
+                        <option value="{{ $ingredient->id }}" {{ in_array($ingredient->id, $menu->ingredients->pluck('id')->toArray()) ? 'selected' : '' }}>
+                            {{ $ingredient->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>

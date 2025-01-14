@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Services\CategoryService;
+use App\Services\IngredientService;
 use Illuminate\Http\Request;
 use App\Services\MenuService;
 
 class MenuController extends Controller
 {
     protected $menuService;
+    protected $categoryService;
+    protected $ingredientService;
 
-    public function __construct(MenuService $menuService)
+    public function __construct(
+        MenuService $menuService , 
+        CategoryService $categoryService, 
+        IngredientService $ingredientService
+    )
     {
         $this->menuService = $menuService;
+        $this->categoryService = $categoryService;
+        $this->ingredientService = $ingredientService;
     }
 
     public function index()
@@ -23,8 +32,9 @@ class MenuController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-        return view('menus.create', compact('categories'));
+        $ingredients = $this->ingredientService->getAllIngredients()->sortBy('name');
+        $categories = $this->categoryService->getAllCategories();
+        return view('menus.create', compact('categories','ingredients'));
     }
 
     public function store(Request $request)
@@ -34,17 +44,22 @@ class MenuController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
+            'ingredients' => 'required|array'
         ]);
 
-        $this->menuService->createMenu($request->all());
+        $menu = $this->menuService->createMenu($request->only(['name', 'description', 'price', 'category_id']));
+
+        $menu->ingredients()->attach($request->ingredients);
+
         return redirect()->route('menus.index')->with('success', 'Menu item created successfully.');
     }
 
     public function edit($id)
     {
-        $categories = Category::all();
+        $categories = $this->categoryService->getAllCategories();
         $menu = $this->menuService->getMenu($id);
-        return view('menus.edit', compact('menu','categories'));
+        $ingredients = $this->ingredientService->getAllIngredients();
+        return view('menus.edit', compact('menu','categories','ingredients'));
     }
 
     public function update(Request $request, $id)
@@ -54,9 +69,11 @@ class MenuController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
+            'ingredients' => 'required|array'
         ]);
 
-        $this->menuService->updateMenu($id, $request->all());
+        $menu = $this->menuService->updateMenu($id, $request->all());
+        $menu->ingredients()->sync($request->ingredients);
         return redirect()->route('menus.index')->with('success', 'Menu item updated successfully.');
     }
 

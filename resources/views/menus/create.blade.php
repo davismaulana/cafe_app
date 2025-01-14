@@ -34,6 +34,19 @@
                     @endforeach
                 </select>
             </div>
+            <div class="mb-3">
+                <label class="form-label">Ingredients</label>
+                <div>
+                    @foreach ($ingredients as $ingredient)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="ingredients[]" id="ingredient_{{ $ingredient->id }}" value="{{ $ingredient->id }}">
+                            <label class="form-check-label" for="ingredient_{{ $ingredient->id }}">
+                                {{ $ingredient->name }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>

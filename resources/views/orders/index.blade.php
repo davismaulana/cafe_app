@@ -24,7 +24,7 @@
                 @foreach ($orders as $order)
                     <tr>
                         <td>{{ $order->customer_name }}</td>
-                        <td>${{ number_format($order->total_price, 2) }}</td>
+                        <td>Rp.{{ number_format($order->total_price, 2) }}</td>
                         <td>
                             <!-- Edit Button -->
                             <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-sm btn-warning">Edit</a>

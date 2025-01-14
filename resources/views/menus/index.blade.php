@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{ $menu->name }}</td>
                         <td>{{ $menu->description }}</td>
-                        <td>${{ number_format($menu->price, 2) }}</td>
+                        <td>Rp.{{ number_format($menu->price, 2) }}</td>
                         <td>{{ $menu->category->name }}</td>
                         <td>
                             <!-- Edit Button -->
