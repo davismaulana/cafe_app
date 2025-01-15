@@ -6,29 +6,37 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Categories</h1>
+        <h1>Employees</h1>
 
         <!-- Add New Category Button -->
-        <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3">Add New Category</a>
+        <a href="{{ route('employees.create') }}" class="btn btn-primary mb-3">Add New Employee</a>
 
         <!-- Display Categories in a Table -->
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>NIK</th>
+                    <th>email</th>
+                    <th>phone</th>
+                    <th>address</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($categories as $category)
+                @foreach ($employees as $employee)
                     <tr>
-                        <td>{{ $category->name }}</td>
+                        <td>{{ $employee->name }}</td>
+                        <td>{{ $employee->NIK }}</td>
+                        <td>{{ $employee->email }}</td>
+                        <td>{{ $employee->phone }}</td>
+                        <td>{{ $employee->address }}</td>
                         <td>
                             <!-- Edit Button -->
-                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
                             <!-- Delete Button -->
-                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
