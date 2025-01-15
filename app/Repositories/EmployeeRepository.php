@@ -23,14 +23,14 @@ class EmployeeRepository
 
     public function update($id, array $data)
     {
-        $ingredient = Employee::findOrFail($id);
-        $ingredient->update($data);
-        return $ingredient;
+        $employee = Employee::findOrFail($id);
+        $employee->update($data);
+        return $employee;
     }
 
     public function delete($id)
     {
-        $ingredient = Employee::findOrFail($id);
-        $ingredient->delete();
+        $employee = Employee::findOrFail($id);
+        $employee->delete();
     }
 }

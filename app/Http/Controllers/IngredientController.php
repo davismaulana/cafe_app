@@ -16,7 +16,7 @@ class IngredientController extends Controller
 
     public function index()
     {
-        $ingredients = $this->ingredientService->getAllIngredients();
+        $ingredients = $this->ingredientService->getAllIngredients()->sortBy('name');
         return view('ingredients.index', compact('ingredients'));
     }
 
@@ -31,7 +31,10 @@ class IngredientController extends Controller
             'name' => 'required|unique:ingredients,name',
         ]);
 
-        $this->ingredientService->createIngredient($request->all());
+        $data = $request->all();
+        $data['name'] = ucwords(strtolower($data['name']));
+
+        $this->ingredientService->createIngredient($data);
         return redirect()->route('ingredients.index')->with('success', 'Ingredient created successfully.');
     }
 
@@ -47,7 +50,10 @@ class IngredientController extends Controller
             'name' => 'required',
         ]);
 
-        $this->ingredientService->updateIngredient($id, $request->all());
+        $data = $request->all();
+        $data['name'] = ucwords(strtolower($data['name']));
+
+        $this->ingredientService->updateIngredient($id, $data);
         return redirect()->route('ingredients.index')->with('success', 'Ingredient updated successfully.');
     }
 

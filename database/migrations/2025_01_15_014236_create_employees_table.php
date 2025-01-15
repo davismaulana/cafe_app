@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->text('address');
+            $table->string('role')->default('casheer');
             $table->timestamps();
         });
     }

@@ -34,6 +34,14 @@
                 <label for="address" class="form-label">Address</label>
                 <textarea name="address" id="address" cols="30" rows="10" class="form-control" required></textarea>
             </div>
+            <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select name="role" id="role" class="form-select" required>
+                    <option value="">Select Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="casheer">Casheer</option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>

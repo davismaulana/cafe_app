@@ -33,7 +33,15 @@
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
-                <textarea name="address" id="address" cols="30" rows="10" class="form-control" value="{{ $employee->address }}" required></textarea>
+                <textarea name="address" id="address" cols="30" rows="10" class="form-control" required>{{ $employee->address }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select name="role" id="role" class="form-select" required>
+                    <option value="">Select Role</option>
+                    <option value="admin" {{ $employee->role === 'admin' ? 'selected' : '' }}>Admin</option>
+                    <option value="casheer" {{ $employee->role === 'casheer' ? 'selected' : '' }}>Casheer</option>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>

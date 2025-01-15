@@ -28,11 +28,12 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'NIK' => 'required|unique:employees,NIK',
+            'name' => 'required|string|max:255',
+            'NIK' => 'required|numeric|unique:employees,NIK',
             'email' => 'required|email|unique:employees,email',
-            'phone' => 'required|unique:employees,phone',
-            'address' => 'required',
+            'phone' => 'required|numeric|unique:employees,phone',
+            'address' => 'required|string',
+            'role' => 'required|in:admin,casheer',
         ]);
 
         $this->employeeService->createEmployee($request->all());
@@ -48,11 +49,12 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'NIK' => 'required|unique:employees,NIK,' . $id,
+            'name' => 'required|string|max:255',
+            'NIK' => 'required|numeric|unique:employees,NIK,' . $id,
             'email' => 'required|email|unique:employees,email,' . $id,
-            'phone' => 'required|unique:employees,phone,' . $id,
-            'address' => 'required',
+            'phone' => 'required|numeric|unique:employees,phone,' . $id,
+            'address' => 'required|string',
+            'role' => 'required|in:admin,casheer',
         ]);
 
         $this->employeeService->updateEmployee($id, $request->all());

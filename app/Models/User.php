@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'employee_id',
     ];
 
     /**
@@ -32,6 +33,16 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function getRoleAttribute()
+    {
+        return $this->employee->role;
+    }
 
     /**
      * Get the attributes that should be cast.

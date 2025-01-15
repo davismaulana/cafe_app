@@ -20,6 +20,7 @@
                     <th>email</th>
                     <th>phone</th>
                     <th>address</th>
+                    <th>role</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -31,6 +32,7 @@
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->phone }}</td>
                         <td>{{ $employee->address }}</td>
+                        <td>{{ $employee->role }}</td>
                         <td>
                             <!-- Edit Button -->
                             <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-sm btn-warning">Edit</a>
