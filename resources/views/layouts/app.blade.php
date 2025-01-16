@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS for sidebar -->
+    <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
     <style>
         body {
             margin: 0;
@@ -14,6 +16,7 @@
             min-height: 100vh;
             display: flex;
         }
+
         .sidebar {
             width: 250px;
             background-color: #343a40;
@@ -21,6 +24,7 @@
             min-height: 100vh;
             padding: 20px;
         }
+
         .sidebar a {
             color: #fff;
             text-decoration: none;
@@ -30,18 +34,31 @@
             border-radius: 5px;
             transition: background-color 0.3s;
         }
+
         .sidebar a:hover {
             background-color: #495057;
         }
+
+        .sidebar a.active {
+            background-color: #495057;
+            /* Background color for active link */
+            font-weight: bold;
+            /* Bold text for active link */
+            border-left: 4px solid #0d6efd;
+            /* Left border for active link */
+        }
+
         .main-content {
             flex: 1;
             padding: 20px;
         }
+
         .navbar {
             background-color: #f8f9fa;
             padding: 10px;
             border-bottom: 1px solid #ddd;
         }
+
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
@@ -53,26 +70,31 @@
                 justify-content: space-around;
                 padding: 10px;
             }
+
             .sidebar a {
                 margin: 0;
                 padding: 10px 15px;
             }
+
             .main-content {
-                margin-bottom: 60px; /* Adjust for mobile sidebar */
+                margin-bottom: 60px;
+                /* Adjust for mobile sidebar */
             }
         }
     </style>
+
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
         <h3 class="text-center mb-4">Cafe App</h3>
-        <a href="{{ route('home') }}" class="active">Dashboard</a>
-        <a href="{{ route('employees.index') }}">Employees</a>
-        <a href="{{ route('menus.index') }}">Menus</a>
-        <a href="{{ route('orders.index') }}">Orders</a>
-        <a href="{{ route('ingredients.index') }}">Ingredients</a>
-        <a href="{{ route('categories.index') }}">Categories</a>
+        <a href="{{ route('home') }}" class="{{ isActive('home') }}">Dashboard</a>
+        <a href="{{ route('employees.index') }}" class="{{ isActive('employees.index') }}">Employees</a>
+        <a href="{{ route('menus.index') }}" class="{{ isActive('menus.index') }}">Menus</a>
+        <a href="{{ route('orders.index') }}" class="{{ isActive('orders.index') }}">Orders</a>
+        <a href="{{ route('ingredients.index') }}" class="{{ isActive('ingredients.index') }}">Ingredients</a>
+        <a href="{{ route('categories.index') }}" class="{{ isActive('categories.index') }}">Categories</a>
     </div>
 
     <!-- Main Content -->
@@ -91,4 +113,5 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

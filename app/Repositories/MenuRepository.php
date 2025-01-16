@@ -33,4 +33,10 @@ class MenuRepository
         $menu = Menu::findOrFail($id);
         $menu->delete();
     }
+
+    public function count()
+    {
+        $count = Menu::count();
+        return $count;
+    }
 }

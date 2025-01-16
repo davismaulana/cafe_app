@@ -37,4 +37,8 @@ class IngredientService
     {
         return $this->ingredientRepository->delete($id);
     }
+    public function countData()
+    {
+        return $this->ingredientRepository->count();
+    }
 }

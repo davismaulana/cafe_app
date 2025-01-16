@@ -37,4 +37,9 @@ class MenuService
     {
         return $this->menuRepository->delete($id);
     }
+
+    public function countData()
+    {
+        return $this->menuRepository->count();
+    }
 }

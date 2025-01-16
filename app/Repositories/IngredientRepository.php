@@ -33,4 +33,9 @@ class IngredientRepository
         $ingredient = Ingredient::findOrFail($id);
         $ingredient->delete();
     }
+    public function count()
+    {
+        $count = Ingredient::count();
+        return $count;
+    }
 }
