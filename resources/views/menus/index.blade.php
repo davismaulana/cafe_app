@@ -1,3 +1,9 @@
+@extends('layouts.app')
+
+@section('title', 'Menus')
+
+@section('content')
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +26,7 @@
                     <th>Description</th>
                     <th>Price</th>
                     <th>Category</th>
+                    <th>Ingredients</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -30,6 +37,11 @@
                         <td>{{ $menu->description }}</td>
                         <td>Rp.{{ number_format($menu->price, 2) }}</td>
                         <td>{{ $menu->category->name }}</td>
+                        <td>
+                            @foreach ($menu->ingredients as $ingredient)
+                                <span class="badge bg-secondary">{{ $ingredient->name }}</span>
+                            @endforeach
+                        </td>
                         <td>
                             <!-- Edit Button -->
                             <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-sm btn-warning">Edit</a>
@@ -51,3 +63,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+@endsection

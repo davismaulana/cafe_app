@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\MenuService;
 use Illuminate\Http\Request;
 use App\Services\OrderService;
 
 class OrderController extends Controller
 {
     protected $orderService;
+    protected $menuService;
 
-    public function __construct(OrderService $orderService)
+    public function __construct(OrderService $orderService , MenuService $menuService)
     {
         $this->orderService = $orderService;
+        $this->menuService = $menuService;
     }
 
     public function index()
@@ -22,18 +25,27 @@ class OrderController extends Controller
 
     public function create()
     {
-        return view('orders.create');
+        $menus = $this->menuService->getAllMenus();
+        return view('orders.create', compact('menus'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'customer_name' => 'required',
-            'total_price' => 'required|numeric',
+            'customer_name' => 'required|string|max:255',
+            'menus' => 'required|array',
+            'menus.*.id' => 'required|exists:menus,id',
+            'menus.*.quantity' => 'required|integer|min:1',
         ]);
 
         $this->orderService->createOrder($request->all());
         return redirect()->route('orders.index')->with('success', 'Order created successfully.');
+    }
+
+    public function show($id)
+    {
+        $order = $this->orderService->getOrder($id);
+        return view('orders.show', compact('order'));
     }
 
     public function edit($id)

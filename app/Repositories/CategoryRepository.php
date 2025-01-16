@@ -33,4 +33,10 @@ class CategoryRepository
         $category = Category::findOrFail($id);
         $category->delete();
     }
+
+    public function count()
+    {
+        $count = Category::count();
+        return $count;
+    }
 }

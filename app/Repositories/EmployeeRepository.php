@@ -33,4 +33,9 @@ class EmployeeRepository
         $employee = Employee::findOrFail($id);
         $employee->delete();
     }
+    public function count()
+    {
+        $count = Employee::count();
+        return $count;
+    }
 }

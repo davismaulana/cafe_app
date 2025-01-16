@@ -37,17 +37,24 @@
                     @endforeach
                 </select>
             </div>
+
             <div class="mb-3">
-                <label for="ingredients" class="form-label">Ingredients</label>
-                <select name="ingredients[]" id="ingredients" class="form-control" multiple required>
+                <label class="form-label">Ingredients</label>
+                <div>
                     @foreach ($ingredients as $ingredient)
-                        <option value="{{ $ingredient->id }}" {{ in_array($ingredient->id, $menu->ingredients->pluck('id')->toArray()) ? 'selected' : '' }}>
-                            {{ $ingredient->name }}
-                        </option>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="ingredients[]" id="ingredient_{{ $ingredient->id }}" value="{{ $ingredient->id }}"
+                                {{ in_array($ingredient->id, $currentIngredients) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="ingredient_{{ $ingredient->id }}">
+                                {{ $ingredient->name }}
+                            </label>
+                        </div>
                     @endforeach
-                </select>
+                </div>
             </div>
+
             <button type="submit" class="btn btn-primary">Update</button>
+
         </form>
     </div>
 

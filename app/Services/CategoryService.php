@@ -37,4 +37,9 @@ class CategoryService
     {
         return $this->categoryRepository->delete($id);
     }
+
+    public function countData()
+    {
+        return $this->categoryRepository->count();
+    }
 }

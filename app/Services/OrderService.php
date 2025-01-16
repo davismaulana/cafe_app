@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Menu;
 use App\Repositories\OrderRepository;
 
 class OrderService
@@ -25,7 +26,20 @@ class OrderService
 
     public function createOrder(array $data)
     {
-        return $this->orderRepository->create($data);
+        $totalPrice = 0;
+        foreach ($data['menus'] as $menu) {
+            $menuModel = Menu::find($menu['id']);
+            $totalPrice += $menuModel->price * $menu['quantity'];
+        }
+
+        $order = $this->orderRepository->create([
+            'customer_name' => $data['customer_name'],
+            'total_price' => $totalPrice
+        ]);
+
+        $this->orderRepository->attachMenus($order, $data['menus']);
+
+        return $order;
     }
 
     public function updateOrder($id, array $data)
@@ -36,5 +50,10 @@ class OrderService
     public function deleteOrder($id)
     {
         return $this->orderRepository->delete($id);
+    }
+
+    public function countData()
+    {
+        return $this->orderRepository->count();
     }
 }

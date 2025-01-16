@@ -37,4 +37,9 @@ class EmployeeService
     {
         return $this->employeeRepository->delete($id);
     }
+
+    public function countData()
+    {
+        return $this->employeeRepository->count();
+    }
 }

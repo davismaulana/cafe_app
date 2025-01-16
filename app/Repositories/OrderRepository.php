@@ -2,18 +2,35 @@
 
 namespace App\Repositories;
 
+use App\Models\Menu;
 use App\Models\Order;
 
 class OrderRepository
 {
+    /**
+     * Retrieve all orders with associated menus.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|\App\Models\Order[]
+     */
     public function all()
     {
-        return Order::all();
+        return Order::with('menus')->get();
     }
 
     public function find($id)
     {
-        return Order::findOrFail($id);
+        return Order::with('menus')->findOrFail($id);
+    }
+
+    public function attachMenus($ordedr, array $menus)
+    {
+        foreach ($menus as $menu) {
+            $menuModel = Menu::find($menu['id']);
+            $ordedr->menus()->attach($menuModel->id, [
+                'quantity' => $menu['quantity'],
+                'price' => $menuModel->price
+            ]);
+        }
     }
 
     public function create(array $data)
@@ -32,5 +49,11 @@ class OrderRepository
     {
         $order = Order::findOrFail($id);
         $order->delete();
+    }
+
+    public function count()
+    {
+        $count = Order::count();
+        return $count;
     }
 }

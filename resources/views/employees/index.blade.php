@@ -1,7 +1,13 @@
+@extends('layouts.app')
+
+@section('title', 'Employees')
+
+@section('content')
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Categories</title>
+    <title>Employees</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -52,4 +58,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html
+</html>
+
+@endsection

@@ -58,8 +58,11 @@ class MenuController extends Controller
     {
         $categories = $this->categoryService->getAllCategories();
         $menu = $this->menuService->getMenu($id);
-        $ingredients = $this->ingredientService->getAllIngredients();
-        return view('menus.edit', compact('menu','categories','ingredients'));
+        $ingredients = $this->ingredientService->getAllIngredients()->sortBy('name');
+
+        $currentIngredients = $menu->ingredients->pluck('id')->toArray();
+
+        return view('menus.edit', compact('menu','categories','ingredients','currentIngredients'));
     }
 
     public function update(Request $request, $id)
