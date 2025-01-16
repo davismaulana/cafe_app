@@ -25,6 +25,13 @@ class EmployeeController extends Controller
         return view('employees.create');
     }
 
+    public function show($id)
+    {
+        $employee = $this->employeeService->getEmployee($id);
+        return view('employees.show', compact('employee'));
+    }
+
+
     public function store(Request $request)
     {
         $request->validate([

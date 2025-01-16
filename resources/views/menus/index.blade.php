@@ -23,10 +23,8 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>Price</th>
                     <th>Category</th>
-                    <th>Ingredients</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -34,15 +32,12 @@
                 @foreach ($menus as $menu)
                     <tr>
                         <td>{{ $menu->name }}</td>
-                        <td>{{ $menu->description }}</td>
-                        <td>Rp.{{ number_format($menu->price, 2) }}</td>
+                          <td>Rp.{{ number_format($menu->price, 2) }}</td>
                         <td>{{ $menu->category->name }}</td>
                         <td>
-                            @foreach ($menu->ingredients as $ingredient)
-                                <span class="badge bg-secondary">{{ $ingredient->name }}</span>
-                            @endforeach
-                        </td>
-                        <td>
+                            <!-- Show Button -->
+                            <a href="{{ route('menus.show', $menu->id) }}" class="btn btn-sm btn-info">Show</a>
+                            
                             <!-- Edit Button -->
                             <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-sm btn-warning">Edit</a>
 

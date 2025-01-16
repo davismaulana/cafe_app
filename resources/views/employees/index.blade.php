@@ -22,10 +22,8 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>NIK</th>
                     <th>email</th>
                     <th>phone</th>
-                    <th>address</th>
                     <th>role</th>
                     <th>Actions</th>
                 </tr>
@@ -34,12 +32,13 @@
                 @foreach ($employees as $employee)
                     <tr>
                         <td>{{ $employee->name }}</td>
-                        <td>{{ $employee->NIK }}</td>
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->phone }}</td>
-                        <td>{{ $employee->address }}</td>
                         <td>{{ $employee->role }}</td>
                         <td>
+                            <!-- Show Button -->
+                            <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-sm btn-info">Show</a>
+
                             <!-- Edit Button -->
                             <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-sm btn-warning">Edit</a>
 

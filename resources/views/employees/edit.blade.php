@@ -33,7 +33,7 @@
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
-                <textarea name="address" id="address" cols="30" rows="10" class="form-control" required>{{ $employee->address }}</textarea>
+                <textarea name="address" id="address" cols="30" rows="3" class="form-control" required>{{ $employee->address }}</textarea>
             </div>
             <div class="mb-3">
                 <label for="role" class="form-label">Role</label>

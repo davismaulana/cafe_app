@@ -54,6 +54,12 @@ class MenuController extends Controller
         return redirect()->route('menus.index')->with('success', 'Menu item created successfully.');
     }
 
+    public function show($id)
+    {
+        $menu = $this->menuService->getMenu($id);
+        return view('menus.show', compact('menu'));
+    }
+
     public function edit($id)
     {
         $categories = $this->categoryService->getAllCategories();
